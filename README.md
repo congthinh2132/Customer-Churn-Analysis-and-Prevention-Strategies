@@ -68,6 +68,7 @@
 - No anomalies detected on the initial review of the dataset.
 - The data types appear consistent with no immediate formatting issues.
 ### 2. Data Visualization (EDA):
+All visualizations included in this project, such as bar charts, heatmaps and feature importance plots, were generated using Python's data visualization libraries. Tools like Matplotlib and Seaborn.
 #### 2.1 Churn Overview:
 ![image](https://github.com/user-attachments/assets/c3f9161e-933a-4b46-b077-b60908625fa0)
 #### 2.2 Customer Demographics, Charges, Contract and Payment Method:
@@ -80,15 +81,15 @@
 ### 3. Machine Learning Model Building:
 #### 3.1 Features Selection:
 - Feature selection is a key step in building effective machine learning models, as it helps to retain only the most important features for prediction.
-- Chi-Square Test (chi2): Used for selecting **categorical features**. It measures the relationship between each categorical feature and the target variable. Features with higher chi-square scores are considered more relevant to the prediction of churn, while features with lower scores may be discarded.
+- **Chi-Square Test** (chi2): Used for selecting **categorical features**. It measures the relationship between each categorical feature and the target variable. Features with higher chi-square scores are considered more relevant to the prediction of churn, while features with lower scores may be discarded.
 
-![Screenshot 2024-12-05 164908](https://github.com/user-attachments/assets/777b50fe-7b7f-43a3-8a22-b0cf8fd379a6)
+![Chi-squared-test-in-project](https://github.com/user-attachments/assets/777b50fe-7b7f-43a3-8a22-b0cf8fd379a6)
 
-- ANOVA F-Test: Applied to **numerical features** to assess how well each numerical feature can differentiate between different classes of the target variable. Features with higher F-statistics are more significant for predicting churn, while lower F-values may suggest that the feature has little impact on the target.
+- **ANOVA F-Test**: Applied to **numerical features** to assess how well each numerical feature can differentiate between different classes of the target variable. Features with higher F-statistics are more significant for predicting churn, while lower F-values may suggest that the feature has little impact on the target.
 
 ![Screenshot 2024-12-05 164928](https://github.com/user-attachments/assets/d5c3d433-bd76-4b32-9955-80db5dc35c53)
 
-- Correlation Heatmap: A visual tool to analyze the relationships between **numerical features**. By showing the correlation between features, the heatmap helps identify highly correlated features that might lead to multicollinearity, allowing for informed decisions about which features to keep or drop.
+- **Correlation Heatmap**: A visual tool to analyze the relationships between **numerical features**. By showing the correlation between features, the heatmap helps identify highly correlated features that might lead to multicollinearity, allowing for informed decisions about which features to keep or drop.
 
 ![image](https://github.com/user-attachments/assets/5172cbf8-b42f-4238-8213-14ba76222e1a)
 
@@ -129,34 +130,42 @@ Train and Optimize the Model: Train the model using the training data (X_train, 
 
 ![image](https://github.com/user-attachments/assets/63a0d55d-aa13-4c89-bca9-8e683a3a894e)
 
+- **Comparison**:
+  - Accuracy: XGBoost achieves a slightly higher accuracy (0.90) than Random Forest with 0.89, indicating a small improvement in overall classification performance.
+  - Precision: XGBoost shows better precision (0.85) than Random Forest (0.84), meaning XGBoost is slightly more accurate in predicting churn customers (class 1).
+  - Recall: XGBoost outperforms Random Forest in recall (0.77 vs. 0.74), demonstrating that XGBoost is better at identifying customers who are likely to churn.
+  - F1 Score: XGBoost has a higher F1 score (0.81) compared to Random Forest (0.78), suggesting that XGBoost achieves a better balance between precision and recall.
+  - ROC AUC: XGBoost (0.94) performs better than Random Forest (0.93) in ROC AUC, which means XGBoost has a slightly higher ability to distinguish between churn and non-churn customers.
+
+- **Conclusion**: The XGBoost model outperforms the Random Forest model across all major evaluation metrics, including accuracy, precision, recall, F1 score, and ROC AUC. XGBoost is slightly better at identifying churn customers and distinguishing between churn and non-churn classes, making it the preferred model in this case.
 ## V. Insights:
-- The largest category of churned customers left due to competitors (45%), indicating customers may be switching to services with better offers or features.
-- Other categories include dissatisfaction (16.2%), attitude issues (16.2%), and pricing concerns (11.3%).
-- Churn rates increase with age, with older groups (65+) being more likely to leave.
-- Customers using Paper Check (38.01%) and Direct Debit (34.49%) show higher churn rates compared to Credit Card users (14.46%).
-- Month-to-Month contracts have the highest churn rate at 46.29%, especially within the first 0-3 months. Although churn decreases over time, it remains relatively high for this group.
-- One-Year and Two-Year contracts experience slight churn increases at renewal periods (e.g., 12 months and 24 months) but maintain much lower churn rates overall.
-- Customers not belonging to specific groups have a high churn rate, nearing 33%.
-- The average number of customer service calls is high, with 2-3 calls per issue reported.
+- The **largest category** of churned customers left due to **competitors (45%)**, indicating customers may be switching to services with better offers or features.
+- Other categories include **dissatisfaction (16.2%)**, **attitude issues (16.2%)**, and **pricing concerns (11.3%)**.
+- **Churn rates increase with age**, with **older groups (65+)** being more likely to leave.
+- Customers using **Paper Check (38.01%)** and **Direct Debit (34.49%)** show higher churn rates compared to **Credit Card users (14.46%)**.
+- **Month-to-Month contracts** have the highest churn rate at **46.29%**, especially within the **first 0-3 months**. Although churn decreases over time, it remains relatively high for this group.
+- **One-Year** and **Two-Year contracts** experience **slight churn increases at renewal periods** (e.g., 12 months and 24 months) but maintain much lower churn rates overall.
+- Customers **not belonging to group** have a high churn rate, nearing **33%**.
+- The average **number of customer service calls is high**, with **2-3 calls** per issue reported.
 ## VI. Recommendations
-### Enhance Competitiveness:
-- Offer better pricing and improved device quality.
-- Create attractive offers for new customers and loyalty programs for existing customers.
-- Focus on differentiating with unique value propositions to address competitor-driven churn (45%).
-### Encourage Contract Stability:
-- Provide incentives for one-year and two-year contracts to stabilize churn rates.
-- Offer exclusive benefits for month-to-month contract users, such as data package discounts and top-up incentives.
-### Promote Credit Card Payments:
-- Encourage credit card payments, as they correlate with lower churn rates compared to paper checks and direct debit.
-### Optimize Customer Service:
-- Streamline problem-solving processes to address customer issues quickly and efficiently.
-- Avoid situations where customers must make repeated unresolved calls.
-- Introduce online and phone-based consulting for multi-channel support.
-### Retention-Focused Strategies:
-- Provide ongoing incentives for loyal customers to reduce churn.
-- Tailor offers to meet the needs of specific customer groups, such as older demographics or high-churn segments.
-### Use the model to early identify churn customers:
-- Leverage machine learning models above to predict potential churn customers based on past behavior and characteristics, enabling proactive retention efforts.
+- **Enhance Competitiveness**:
+  - Offer better pricing and improved device quality.
+  - Create attractive offers for new customers and loyalty programs for existing customers.
+  - Focus on differentiating with unique value propositions to address competitor-driven churn (45%).
+- **Encourage Contract Stability**:
+  - Provide incentives for one-year and two-year contracts to stabilize churn rates.
+  - Offer exclusive benefits for month-to-month contract users, such as data package discounts and top-up incentives.
+- **Promote Credit Card Payments**:
+  - Encourage credit card payments, as they correlate with lower churn rates compared to paper checks and direct debit.
+- **Optimize Customer Service**:
+  - Streamline problem-solving processes to address customer issues quickly and efficiently.
+  - Avoid situations where customers must make repeated unresolved calls.
+  - Introduce online and phone-based consulting for multi-channel support.
+- **Retention-Focused Strategies**:
+  - Provide ongoing incentives for loyal customers to reduce churn.
+  - Tailor offers to meet the needs of specific customer groups, such as older demographics or high-churn segments.
+- **Use the model to early identify churn customers**:
+  - Leverage machine learning models above to predict potential churn customers based on past behavior and characteristics, enabling proactive retention efforts.
 
 
 
