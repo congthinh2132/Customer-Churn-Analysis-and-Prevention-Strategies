@@ -67,7 +67,7 @@
 - The columns churn category and churn reason have many nulls, but this is acceptable because those customers are still active users.
 - No anomalies detected on the initial review of the dataset.
 - The data types appear consistent with no immediate formatting issues.
-### 2. Data Visualization:
+### 2. Data Visualization (EDA):
 #### 2.1 Churn Overview:
 ![image](https://github.com/user-attachments/assets/c3f9161e-933a-4b46-b077-b60908625fa0)
 #### 2.2 Customer Demographics, Charges, Contract and Payment Method:
@@ -93,15 +93,41 @@
 ![image](https://github.com/user-attachments/assets/5172cbf8-b42f-4238-8213-14ba76222e1a)
 
 #### 3.2 Model Development:
-- Select Input and Output Variables: Choose the input variables (features) based on the feature selection process above and the output variable (target) from the dataset. The target typically represents the churn status or customer behavior you are predicting.
-- Split the Data: Use the train_test_split function to divide the data into training (X_train, y_train) and testing (X_test, y_test) sets, maintaining an 80-20% ratio for training and testing, respectively. This ensures the model is trained on a majority of the data and tested on a smaller portion for validation.
-- Build Preprocessing Pipeline: Identify numerical features (e.g., account length, monthly charges) and categorical features (e.g., gender, payment method) from the dataset.
+- **Select Input and Output Variables:** Choose the input variables (features) based on the feature selection process above and the output variable (target) from the dataset. The target typically represents the churn status or customer behavior you are predicting.
+- **Split the Data:** Use the train_test_split function to divide the data into training (X_train, y_train) and testing (X_test, y_test) sets, maintaining an 80-20% ratio for training and testing, respectively. This ensures the model is trained on a majority of the data and tested on a smaller portion for validation.
+- **Build Preprocessing Pipeline:** Identify numerical features (e.g., account length, monthly charges) and categorical features (e.g., gender, payment method) from the dataset.
 Use ColumnTransformer: Apply preprocessing steps using the ColumnTransformer. For numerical features, standardize or normalize the data (e.g., using StandardScaler or MinMaxScaler). For categorical features, encode the data using methods like OneHotEncoder or LabelEncoder.
-- Build the Model: Select a suitable machine learning model, such as the RandomForestRegressor, which is robust and works well for a variety of data types. Predefine the hyperparameters (e.g., the number of trees, max depth) based on domain knowledge or preliminary testing.
-- Create the Model Pipeline: Combine both preprocessing steps and the machine learning model into a single pipeline using Pipeline. This ensures that the data is preprocessed and transformed consistently during both training and testing phases.
+- **Build the Model:** Select a suitable machine learning model, such as the RandomForestRegressor, XGBoost,which is robust and works well for a variety of data types. Predefine the hyperparameters based on domain knowledge or preliminary testing.
+- **Create the Model Pipeline:** Combine both preprocessing steps and the machine learning model into a single pipeline using Pipeline. This ensures that the data is preprocessed and transformed consistently during both training and testing phases.
 Train and Optimize the Model: Train the model using the training data (X_train, y_train) and apply grid search (GridSearchCV) to find the optimal hyperparameters. Grid search helps systematically test a range of hyperparameter values to improve model performance.
 #### 3.2 Model Evaluation:
+- **Random Forest**:
 
+|              | Precision | Recall | F1-Score | Support |
+|--------------|-----------|--------|----------|---------|
+| No           | 0.91      | 0.95   | 0.93     | 979     |
+| Yes          | 0.84      | 0.74   | 0.78     | 359     |
+| Accuracy     | X         | X      | 0.89     | 1338    |
+| Macro avg    | 0.87      | 0.84   | 0.86     | 1338    |
+| Weighted avg | 0.89      | 0.89   | 0.89     | 1338    |
+
+![image](https://github.com/user-attachments/assets/17d07360-971e-4c79-a67f-01d906afed88)
+
+![image](https://github.com/user-attachments/assets/87d43374-2d8a-4afa-a103-5a4b60458967)
+
+- **XGBoost**:
+
+|              | Precision | Recall | F1-Score | Support |
+|--------------|-----------|--------|----------|---------|
+| No           | 0.92      | 0.95   | 0.93     | 979     |
+| Yes          | 0.85      | 0.77   | 0.81     | 359     |
+| Accuracy     | X         | X      | 0.90     | 1338    |
+| Macro avg    | 0.88      | 0.86   | 0.87     | 1338    |
+| Weighted avg | 0.90      | 0.90   | 0.90     | 1338    |
+
+![image](https://github.com/user-attachments/assets/867e3d7d-039b-443a-96fa-c0ce6c5b8bd2)
+
+![image](https://github.com/user-attachments/assets/63a0d55d-aa13-4c89-bca9-8e683a3a894e)
 
 ## V. Insights:
 - The largest category of churned customers left due to competitors (45%), indicating customers may be switching to services with better offers or features.
@@ -129,6 +155,8 @@ Train and Optimize the Model: Train the model using the training data (X_train, 
 ### Retention-Focused Strategies:
 - Provide ongoing incentives for loyal customers to reduce churn.
 - Tailor offers to meet the needs of specific customer groups, such as older demographics or high-churn segments.
+### Use the model to early identify churn customers:
+- Leverage machine learning models above to predict potential churn customers based on past behavior and characteristics, enabling proactive retention efforts.
 
 
 
