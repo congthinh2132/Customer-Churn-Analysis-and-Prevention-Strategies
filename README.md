@@ -1,7 +1,7 @@
-# [PYTHON] Customer-Churn-Analysis-and-Prevention-Strategies
+# [PYTHON] Customer Churn Analysis and Prevention Strategies
 ## I. Introduction:
 ### 1. Business questions:
-- What factors drive customer churn?
+- What factors drive customer churn? 
 - How can we develop effective strategies to prevent customers from leaving?
 ### 2. Dataset:
 - Churn customers dataset represents the loss of customers who stop using a company's product or service, posing challenges for sustained business growth.
